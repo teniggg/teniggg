@@ -1,1 +1,100 @@
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+def draw_board(board):
+    print(board[7] + " |" + board[8] + " |" + board[9])
+    print("--+--+--")
+    print(board[4] + " |" + board[5] + " |" + board[6])
+    print("--+--+--")
+    print(board[1] + " |" + board[2] + " |" + board[3])
+player1 = input("Erster Hauptmann: ")
+player2 = input("Zweiter Hauptmann: ")
+print(player1 + ": 卐 |" + player2 + ": 卍")
+def game():
+    turn = "卐"
+    count = 0
+    player_turn = player1
+    for i in range(10):
+        draw_board(board)
+        print("卐Dein Kriegszug, " + player_turn + ". Wohin mein Führer卍")
+        move = eval(input())
+        if board[move] == " ":
+            board[move] = turn
+            count += 1
+        else:
+            print("卐Alle tot卍.\n卐Wen jetzt vergasen?卍")
+            continue
+        if count >= 5:
+            if board[7] == board[8] == board[9] != " ":
+                declare_winner(turn)
+                break
+            elif board[4] == board[5] == board[6] != " ":
+                declare_winner(turn)
+                break
+            elif board[1] == board[2] == board[3] != " ":
+                declare_winner(turn)
+                break
+            elif board[1] == board[4] == board[7] != " ":
+                declare_winner(turn)
+                break
+            elif board[2] == board[5] == board[8] != " ":
+                declare_winner(turn)
+                break
+            elif board[3] == board[6] == board[9] != " ":
+                declare_winner(turn)
+                break
+            elif board[7] == board[5] == board[3] != " ":
+                declare_winner(turn)
+                break
+            elif board[1] == board[5] == board[9] != " ":
+                declare_winner(turn)
+                break
+            elif board[1] == board[3] == board[5] != " ":
+                declare_winner(turn)
+                break
+            elif board[5] == board[1] == board[7] != " ":
+                declare_winner(turn)
+                break
+            elif board[5] == board[7] == board[9] != " ":
+                declare_winner(turn)
+                break
+            elif board[5] == board[9] == board[3] != " ":
+                declare_winner(turn)
+                break
+            elif board[8] == board[4] == board[6] != " ":
+                declare_winner(turn)
+                break
+            elif board[2] == board[4] == board[6] != " ":
+                declare_winner(turn)
+                break
+            elif board[4] == board[8] == board[2] != " ":
+                declare_winner(turn)
+                break
+            elif board[6] == board[2] == board[8] != " ":
+                declare_winner(turn)
+
+
+        if count == 9:
+            print("\n卐Alle tot.卍\n")
+            print("卐Nochma es gibt keinen Frieden卍")
+
+        if turn == "卐":
+            turn = "卍"
+            player_turn = player2
+        else:
+            turn = "卐"
+            player_turn = player1
+
+    restart = input("\nWillste nochma?(y/n): ")
+    if restart == "y" or restart == "Y":
+        for element in board:
+            board[board.index(element)] = " "
+        game()
+def declare_winner(turn):
+    draw_board(board)
+    print("\nSpiel Aus.\nSiegschlüssel: dreieck / 3 in ner reihe")
+    if turn == "卐":
+        print("Du hast die Menschheit gesäubert: " + player1)
+    else:
+        print("Du hast die Menschheit gesäubert: " + player2)
+if __name__ == "__main__":
+    game()
 
